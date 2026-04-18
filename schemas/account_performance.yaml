@@ -1,0 +1,106 @@
+openapi: 3.0.3
+info:
+  title: Account Performance IQ Action Group
+  version: 1.0.0
+  description: |
+    Operations for querying SaaS account performance data. Used by the
+    Account Performance IQ specialist agent to answer questions about
+    account health, feature adoption, revenue, and rankings.
+
+paths:
+  /get_account_summary:
+    post:
+      summary: Get a performance summary for a single account.
+      description: |
+        Returns a consolidated summary for one account (active users, feature
+        adoption, MRR, health score) over a defined time period.
+      operationId: get_account_summary
+      parameters:
+        - name: account_id
+          in: query
+          required: true
+          description: The unique identifier of the account (e.g., ACC-204).
+          schema:
+            type: string
+        - name: start_date
+          in: query
+          required: true
+          description: Start of the reporting period as an ISO 8601 date (YYYY-MM-DD).
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: true
+          description: End of the reporting period as an ISO 8601 date (YYYY-MM-DD).
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: Account performance summary.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  body:
+                    type: string
+
+  /get_top_accounts:
+    post:
+      summary: Get the top N accounts ranked by a metric.
+      description: |
+        Returns a ranked list of accounts for a given metric
+        (mrr_cad, active_users, feature_adoption_pct, health_score) over
+        a date range. Supports both ascending (worst/underperforming) and
+        descending (top/best) ordering.
+      operationId: get_top_accounts
+      parameters:
+        - name: metric
+          in: query
+          required: true
+          description: |
+            The metric to rank by. Supported values: "mrr_cad",
+            "active_users", "feature_adoption_pct", "health_score".
+          schema:
+            type: string
+        - name: order
+          in: query
+          required: true
+          description: |
+            Sort order. "desc" returns the highest values (top/best).
+            "asc" returns the lowest (worst/underperforming).
+          schema:
+            type: string
+            enum: [asc, desc]
+        - name: limit
+          in: query
+          required: true
+          description: Number of accounts to return (e.g., 5, 10, 25).
+          schema:
+            type: integer
+        - name: start_date
+          in: query
+          required: true
+          description: Start of the ranking period as an ISO 8601 date (YYYY-MM-DD).
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: true
+          description: End of the ranking period as an ISO 8601 date (YYYY-MM-DD).
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: Ranked list of accounts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  body:
+                    type: string

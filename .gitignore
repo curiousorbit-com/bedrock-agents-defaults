@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# CDK
+cdk.out/
+cdk.context.json
+.cdk.staging/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+
+# Secrets — never commit
+*.pem
+.env
+.env.*
+!.env.example
+
+# Claude Code internal scratchpad — not for public repo
+CLAUDE.md
