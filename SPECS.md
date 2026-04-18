@@ -8,8 +8,8 @@ and why.
 
 One Bedrock Agent specialist + one Lambda action group. Purpose:
 
-1. Reproduce a Claude Haiku 4.5 clarification-loop bug that triggers when
-   default values are framed *descriptively* in an agent instruction
+1. Demonstrate a Claude Haiku 4.5 clarification-loop pitfall that triggers
+   when default values are framed *descriptively* in an agent instruction
    (`instructions/broken.txt`).
 2. Demonstrate the fix: *imperative* phrasing
    (`instructions/fixed.txt`).
@@ -85,17 +85,17 @@ asserts:
 2. `Do NOT ask the user to confirm` — explicit negation of the default
    Claude behaviour to clarify.
 3. `never for a missing date or metric` — rules out the specific
-   clarification the bug produces.
+   clarification the pitfall produces.
 
 Any phrasing that preserves all three survives the test. Paraphrasing
 without all three should be considered a regression.
 
-### `broken.txt` — bug reproducer
+### `broken.txt` — pitfall reproducer
 
 Descriptive phrasing ("Default date range: X when the user omits a date
 range") that triggers the pre-clarification behaviour. Must **not** carry
 `MANDATORY DEFAULTS` or `Do NOT ask` — a test asserts this so the demo
-doesn't silently lose its bug.
+doesn't silently lose its pitfall.
 
 ## Foundation model
 

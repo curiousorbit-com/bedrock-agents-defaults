@@ -130,9 +130,9 @@ def test_agent_role_has_inline_marketplace_statement():
 def test_fixed_variant_has_mandatory_defaults_lockdown():
     """`fixed` instruction must frame defaults imperatively so Haiku applies silently.
 
-    The bug: descriptive phrasing ("Default date range: X when user omits...")
-    lets Haiku read the default as an open question and ask the user to
-    confirm dates/metrics. The fix is commandy phrasing — `MANDATORY
+    The pitfall: descriptive phrasing ("Default date range: X when user
+    omits...") lets Haiku read the default as an open question and ask the
+    user to confirm dates/metrics. The fix is commandy phrasing — `MANDATORY
     DEFAULTS ... Do NOT ask ... Apply them and answer` — that leaves no room
     to interpret 'omits dates' as 'needs clarification'.
 
@@ -156,19 +156,19 @@ def test_broken_variant_does_not_have_mandatory_defaults_lockdown():
     """`broken` instruction must NOT carry the fix — it's the reproducer.
 
     If someone accidentally ports the lockdown phrasing into broken.txt, the
-    video demo loses its bug, so lock that down in tests.
+    video demo loses its pitfall, so lock that down in tests.
     """
     instruction = _instruction(_template("broken"))
     assert "MANDATORY DEFAULTS" not in instruction, (
-        "broken instruction must NOT carry 'MANDATORY DEFAULTS' — it's the bug repro"
+        "broken instruction must NOT carry 'MANDATORY DEFAULTS' — it's the pitfall repro"
     )
     assert "Do NOT ask" not in instruction, (
-        "broken instruction must NOT forbid asking — that's the fix, not the bug"
+        "broken instruction must NOT forbid asking — that's the fix, not the pitfall"
     )
 
 
 def test_both_variants_lock_to_real_schema_columns():
-    """Schema lock should be present in both variants — it's orthogonal to the defaults bug."""
+    """Schema lock should be present in both variants — it's orthogonal to the defaults pitfall."""
     expected = (
         "account_id, date, active_users, feature_adoption_pct, mrr_cad, "
         "health_score"

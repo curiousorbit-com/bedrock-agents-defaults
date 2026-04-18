@@ -9,9 +9,9 @@ Account/region come from CDK's standard env vars — run with
 ``--context account=...`` / ``--context region=...``.
 
 Context:
-    instructionVariant  'broken' (reproduces the bug) or 'fixed' (MANDATORY
-                        DEFAULTS pattern). Default is 'fixed'. Override with
-                        ``cdk synth -c instructionVariant=broken``.
+    instructionVariant  'broken' (reproduces the pitfall) or 'fixed'
+                        (MANDATORY DEFAULTS pattern). Default is 'fixed'.
+                        Override with ``cdk synth -c instructionVariant=broken``.
 """
 
 from __future__ import annotations

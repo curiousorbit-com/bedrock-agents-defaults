@@ -1,7 +1,7 @@
 # Stop Your Bedrock Agent From Asking Dumb Questions
 
-Minimal, deployable repo + fix for a **prompt-tuning bug on Claude Haiku 4.5**
-inside Amazon Bedrock Agents.
+Minimal, deployable repo for a subtle **instruction-tuning pitfall** on
+Claude Haiku 4.5 in Amazon Bedrock Agents — and the prompt-craft fix.
 
 When you phrase default values *descriptively*:
 
@@ -32,7 +32,7 @@ Companion video: **Stop Your Bedrock Agent From Asking Dumb Questions**
 ```
 .
 ├── instructions/
-│   ├── broken.txt      # descriptive defaults — reproduces the bug
+│   ├── broken.txt      # descriptive defaults — triggers the pitfall
 │   └── fixed.txt       # MANDATORY DEFAULTS — fixes it
 ├── schemas/
 │   └── account_performance.yaml    # OpenAPI schema for the action group
@@ -53,7 +53,7 @@ One specialist agent (`AccountPerformanceIQ`), one Lambda, mock in-memory data.
 Production deployments use Athena-backed Lambdas and a `SUPERVISOR_ROUTER`
 parent agent on top of N specialists — see
 [*Full production pattern*](#full-production-pattern) at the bottom. Everything
-not needed to reproduce the bug has been stripped out.
+not needed to demonstrate the pitfall has been stripped out.
 
 Full technical spec (domain, defaults, IAM rationale, test guards) is in
 [`SPECS.md`](SPECS.md).
@@ -106,7 +106,7 @@ export CDK_DEFAULT_REGION=us-east-1
 uv run cdk synth
 ```
 
-Switch to the **broken** variant to reproduce the bug on camera:
+Switch to the **broken** variant to reproduce the pitfall on camera:
 
 ```bash
 uv run cdk synth -c instructionVariant=broken
@@ -164,7 +164,7 @@ asserts three things about the `fixed` instruction:
 
 Remove any one and the test fails. This test is portable — drop it into your
 own Bedrock Agents repo, point it at your instruction string, and you've got
-a tripwire against the bug ever regressing.
+a tripwire against the pitfall ever regressing.
 
 ## Why this happens (short version)
 

@@ -1,14 +1,14 @@
 """AgentStack: one Bedrock specialist agent (Account Performance IQ).
 
-Single specialist — no supervisor. The bug this repo reproduces manifests on
-the specialist's instruction text (pre-clarifying on no-date prompts), so a
-supervisor adds no explanatory value and doubles the deploy surface. A
-production multi-specialist pattern with a ``SUPERVISOR_ROUTER`` parent is
-documented in ``README.md``.
+Single specialist — no supervisor. The pitfall this repo demonstrates
+manifests on the specialist's instruction text (pre-clarifying on no-date
+prompts), so a supervisor adds no explanatory value and doubles the deploy
+surface. A production multi-specialist pattern with a ``SUPERVISOR_ROUTER``
+parent is documented in ``README.md``.
 
 Instruction variant is chosen via CDK context:
 
-    cdk synth -c instructionVariant=broken     # reproduces the bug
+    cdk synth -c instructionVariant=broken     # reproduces the pitfall
     cdk synth -c instructionVariant=fixed      # MANDATORY DEFAULTS pattern (default)
 
 The four non-obvious IAM requirements for Bedrock Agents
